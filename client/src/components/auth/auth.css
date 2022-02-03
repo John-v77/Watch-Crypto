@@ -1,0 +1,31 @@
+.auth_form{
+    width: 30%;
+    padding: 5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin: 4rem 28%;
+}
+
+.auth_form form{
+    display: flex;
+    flex-direction: column;
+}
+
+.auth_form input{
+    margin: 1rem;
+}
+
+.auth_form label{
+    margin: 0.5rem 1rem;
+}
+
+.auth_form button{
+    padding: 0.3rem;
+    margin-left: 1rem;
+    max-width: 7rem;
+    border:none;
+    background-color: lightskyblue;
+    border-radius: 4px;
+    color: white;
+    font-weight: 700;
+
+}
