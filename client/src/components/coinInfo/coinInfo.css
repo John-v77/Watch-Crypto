@@ -1,0 +1,23 @@
+.coin_card{
+    width: 15rem;
+    height: 5rem;
+    background-color: white;
+    margin: 2rem;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+}
+
+.coin_card h3{
+    margin:0 1rem;
+}
+
+.coin_card h4{
+    margin: 0 1rem;
+}
+
+.coin_card__right,
+.coin_card__left{
+    margin-top: 1rem;
+}
