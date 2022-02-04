@@ -1,39 +1,33 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const {graphqlHTTP} = require('express-graphql')
+const mongoose = require('mongoose')
+
+const graphQLSchema = require('./graphQL/schema')
+const graphQLResolvers = require('./graphQL/resolvers/index-resolver')
+// const isAuth = require('./midleware/is-auth')
+
 
 
 require('dotenv').config()
-const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
-
-const {graphqlHTTP} = require('express-graphql')
-
 const PORT = process.env.PORT
 const MONGO_URI = process.env.MONGO_URI
 
-//import modules
-const graphqlSchema = require(`./graphQL/schema`)
-const graphqlResolvers = require('./graphQL/resolvers/index-resolver')
-
-// console.log('graphqlSchema', graphqlSchema)
-
 const app = express()
+
 app.use(bodyParser.json())
 
+//will pass this function without executing, for express to execute
+// app.use(isAuth)
+//
 
-//GraphQl --
-app.use('./graphql', graphqlHTTP({
-    schema: graphqlSchema,
-    rootValue: graphqlResolvers,
+app.use('/graphql', graphqlHTTP({
+    // /the below schema is in a string
+    schema: graphQLSchema,
+    rootValue: graphQLResolvers,
     graphiql: true
 }))
 
-
-//conection to Mongo DB
 mongoose.connect(MONGO_URI)
-        .then(console.log(`connected to database`), _=> app.listen(PORT))
-        .catch(err => {console.log(err)})
-
-
-app.get('/', (req, res, next) => {
-    res.send('Hello World!')
-})
+.then( _=> app.listen(PORT), console.log(`connected to dataBase port ${PORT}`))
+.catch(err => {console.log(err)})
