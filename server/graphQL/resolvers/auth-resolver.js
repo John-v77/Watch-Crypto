@@ -1,14 +1,34 @@
 const bcrypt = require('bcryptjs')
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const User = require('../../models/user-model')
 
-//login user
-// const login = async ({email, password}) =>{
-//     const user = await User.findOne({email:email})
-//     if(!user) throw new Error('Invalid Credentials: user not found')
 
-//     return 
-// }
+// login user
+const login = async ({email, password}) =>{
+
+    const user = await User.findOne({email:email})
+    if(!user) throw new Error('Invalid Credentials: user not found')
+
+
+    const isEqual = await bcrypt.compare(password, user.password)
+    if(!isEqual) throw new Error('Invalid Credentials: incorrect password')
+    
+    
+    //asign new token for current login
+    const token = await jwt.sign(
+        {   userId: user.id,   email:user.email },
+        'SecureLongSecretKey687',
+        {expiresIn: '1h'}
+    )
+
+    return {
+        userId: user.id,
+        userName: user.name,
+        email:  user.email,
+        token:  token, 
+        tokenExpiration: 1
+    } 
+}
 
 
 //create user
@@ -33,6 +53,6 @@ const createUser = async (args) =>{
 }
 
 module.exports ={
-    // login,
+    login,
     createUser
 }
