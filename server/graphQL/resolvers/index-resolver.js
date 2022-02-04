@@ -1,5 +1,6 @@
 const coinResolver = require('./coin-resolver')
 const userResolver = require('./auth-resolver')
+const votesResolver = require('./votes-resolver')
 
 // console.log(coinResolver)
 
@@ -7,7 +8,8 @@ const userResolver = require('./auth-resolver')
 
 const rootResolver ={
     ...userResolver,
-    ...coinResolver
+    ...coinResolver,
+    ...votesResolver
 }
 
 module.exports = rootResolver
