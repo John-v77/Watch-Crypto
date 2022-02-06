@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const {graphqlHTTP} = require('express-graphql')
 const mongoose = require('mongoose')
 
-const graphQLSchema = require('./graphQL/schema')
+const graphQLSchema = require('./graphQL/schemaGraphQL')
 const graphQLResolvers = require('./graphQL/resolvers/index-resolver')
 // const isAuth = require('./midleware/is-auth')
 

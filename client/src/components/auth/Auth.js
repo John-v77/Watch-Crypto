@@ -3,14 +3,15 @@ import './auth.css'
 
 function Auth(props) {
 
-    const [stateLogin, setStateLogin] = useState(false)
+    const {isLoging} = props
+
     const [loginRequest, setLoginRequest] = useState({})
 
     const sendReq =(e)=>{
         console.log('sending request')
         e.preventDefault()
 
-        if (loginRequest.username.trim().length === 0 ||
+        if (loginRequest.email.trim().length === 0 ||
             loginRequest.password.trim().length === 0) return
 
         
@@ -33,7 +34,7 @@ function Auth(props) {
                 <label>Password</label>
                 <input onChange={recordVal} type={'password'} placeholder='password' name='password'/>
 
-                <button type='submit'>{stateLogin ? 'Login' : 'Register'}</button>
+                <button type='submit'>{isLoging ? 'Login' : 'Register'}</button>
                 
             </form>
         </div>

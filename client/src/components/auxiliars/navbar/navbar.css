@@ -12,6 +12,13 @@
 }
 
 .navBar__links li{
-    text-decoration: none;
     padding: 1rem 0.8rem;
 }
+
+.navBar__links a{
+    text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+  }

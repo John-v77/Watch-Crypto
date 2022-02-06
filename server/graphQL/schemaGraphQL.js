@@ -2,13 +2,17 @@ const {buildSchema} = require('graphql')
 
 module.exports = buildSchema(`
 
+    type Vote {
+        _id: ID!
+        votes: Int!
+        users: [String!]
+    }
+
     type Coin{
         _id:    ID!
         title:  String!
         ticker: String!
     }
-
-
 
 
     type User{
@@ -20,6 +24,8 @@ module.exports = buildSchema(`
 
     type AuthData{
         userId:             ID!
+        userName:           String!
+        email:              String!
         token:              String!
         tokenExpiration :   Int!
     }
@@ -40,11 +46,15 @@ module.exports = buildSchema(`
     type RootQuery {
         login(email: String!, password: String!): AuthData!
         coins:[Coin!]!
+        fetchVotes:[Vote!]!
     }
 
     type RootMutation{
         createUser(userInput: UserInput): User
         addCoin(coinInput: CoinInput): Coin
+
+        votedCoin(coinId: ID!, userId: ID!): Vote!
+        removeVote(voteId: ID!): Coin!
     }
 
     schema{

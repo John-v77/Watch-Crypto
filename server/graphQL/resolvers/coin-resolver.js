@@ -1,4 +1,4 @@
-const Coin = require('../../models/coin-model')
+const Coin = require('../../models-Mongoose/coin-model')
 
     //fetch all the coins
     const coins = async _=>{

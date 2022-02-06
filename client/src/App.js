@@ -12,8 +12,8 @@ function App() {
 
         <Routes>
           <Route path='/'             />
-          <Route path='/register'     element={<Auth/>}/>
-          <Route path='/login'        element={<Auth/>}/>
+          <Route path='/register'     element={<Auth isLoging={false}/>}/>
+          <Route path='/login'        element={<Auth isLoging={true}/>}/>
           <Route path='/coinsList'    element={<CoinList/>}/>
           <Route path='/*'            element={<ErrorPage/>}/>
           
