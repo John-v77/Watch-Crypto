@@ -11,9 +11,29 @@ const graphQLResolvers = require('./graphQL/resolvers/index-resolver')
 
 require('dotenv').config()
 const PORT = process.env.PORT
-const MONGO_URI = process.env.MONGO_URI
+const MONGO_URI = process.env.MONGODB_URI
 
 const app = express()
+
+//cors
+// const cors = require('cors')
+// app.use(
+//     cors({
+//         credentials:true,
+//         origin: ["http://localhost:3000"]  // client url
+//     })
+// )
+
+//handle CORS error 
+app.use((req, res, next) => {
+    console.log(req.body, '*body*')
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    if(req.method === 'OPTIONS'){ return res.sendStatus(200)}
+    next()
+})
+
 
 app.use(bodyParser.json())
 
