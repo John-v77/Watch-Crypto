@@ -12,6 +12,8 @@ module.exports = buildSchema(`
         _id:    ID!
         title:  String!
         ticker: String!
+        voters: [String!]
+        votes: Int
     }
 
 

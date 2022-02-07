@@ -14,7 +14,8 @@ const Coin = require('../../models-Mongoose/coin-model')
         
         const newCoin = new Coin({
             title: args.coinInput.title,
-            ticker: args.coinInput.ticker
+            ticker: args.coinInput.ticker,
+            votes: 0
         })
         try{
 
