@@ -24,11 +24,22 @@ const actions ={
             url: baseURL,
             method: 'post',
             headers: headers,
-            data: queriesQL.fetchAllCoins
+            data: queriesQL.fetchAllCoinsQuery
         })
-
         return res
-    }
+    },
+
+    loginUser: async(userInfo)=>{
+        let res = await axios({
+            url:baseURL, 
+            method:'post',
+            headers: headers,
+            data:queriesQL.loginUserQuery(userInfo)
+        })
+        return res
+    },
+
+    
 
 }
 

@@ -5,12 +5,10 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     email: {type:String, required:true},
     password: {type:String, required:true},
-
-    //relational field
-    votes: [
+    votes: [                                            //relational field
         {
             type: Schema.Types.ObjectId,
-            ref: 'Coin'              // points to the coin model
+            ref: 'Coin'                                 // points to the coin model
         }
     ]
 })

@@ -1,7 +1,7 @@
 const  querieGraphQL = {
     
     // fetch all coins
-    fetchAllCoins: {
+    fetchAllCoinsQuery: {
         query:`
             query{
                 coins{
@@ -14,6 +14,28 @@ const  querieGraphQL = {
             }
         `
     },
+
+    loginUserQuery: async (data)=> {
+        return{
+            query:`
+                query Login(@email: String!, @password: String!){
+                    login(email, password){
+                        userId
+                        userName
+                        email
+                        token
+                        tokenExpiration
+                    }
+                }
+            `,
+            variables:{
+                email:data.email,
+                password:data.password
+            }
+        }
+    }
+
+
 
 }
 

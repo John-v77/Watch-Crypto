@@ -26,7 +26,8 @@ const login = async ({email, password}) =>{
         userName: user.name,
         email:  user.email,
         token:  token, 
-        tokenExpiration: 1
+        tokenExpiration: 1,
+        votes: user.votes
     } 
 }
 
@@ -42,7 +43,8 @@ const createUser = async (args) =>{
         const hashedPassword = await bcrypt.hash(args.userInput.password, 12)
         const user = new User({
             email:      args.userInput.email,
-            password:   hashedPassword
+            password:   hashedPassword,
+
         })
         const result = await user.save()
 

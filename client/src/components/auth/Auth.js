@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import actions from '../../api/api';
 import './auth.css'
 
 function Auth(props) {
@@ -14,12 +15,16 @@ function Auth(props) {
         if (loginRequest.email.trim().length === 0 ||
             loginRequest.password.trim().length === 0) return
 
+        actions.loginUser(loginRequest)
+            .then(res =>{
+                console.log(res, 'response')
+            })
+            .catch(err => console.log(err))
         
     }
 
     const recordVal=(e)=>{
         setLoginRequest({...loginRequest, [e.target.name] : e.target.value})
-        console.log('record value', loginRequest)
     }
 
 
