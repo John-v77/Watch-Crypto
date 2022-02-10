@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import actions from '../../../api/api';
+import { UserContext } from '../../auxiliars/Context';
 import './auth.css'
 
 function Auth(props) {
 
+    //login Contex
+    // const {user, setUser} = useContext(UserContext)
+    // const login = UserContext(UserContext)
+
     const {isLoging} = props
 
-
+    // object to be sent to API
     const [loginRequest, setLoginRequest] = useState({})
 
     // #1
@@ -24,6 +29,12 @@ function Auth(props) {
             actions.loginUser(loginRequest)
             .then(res =>{
                 console.log(res, 'response')
+                // setUser({
+                //     userName:'sa',
+                //     token:'nsaull',
+                //     tokenExpiration:'nulfdl'
+                // })
+                // console.log(user, '1')
             })
             .catch(err => console.log(err))
             return
@@ -34,6 +45,12 @@ function Auth(props) {
         actions.registerUser(loginRequest)
                 .then(res =>{
                     console.log(res, 'response register')
+                    // setUser({
+                    //     userName:'sa',
+                    //     token:'nsaull',
+                    //     tokenExpiration:'nulfdl'
+                    // })
+                    // console.log(user, '2')
                 })
                 .catch(err => console.log(err))
 

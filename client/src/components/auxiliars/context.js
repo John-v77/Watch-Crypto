@@ -4,20 +4,23 @@ export const UserContext = React.createContext()
 
 export const UserContextProvider =(props)=>{
     const [user, setUser] = useState({
-        userName:null,
-        token:null,
-        tokenExpiration:null
+        userName:'sa',
+        token:'nsaull',
+        tokenExpiration:'nulfdl'
     })
 
-    const logout =()=> setUser({  userName:null,    token:null,     tokenExpiration:null })
+    const logout =()=> {
+        setUser({  userName:null,    token:null,     tokenExpiration:null })
+        console.log('logout', user)    
+    }
     const logIn =(user, token, tokenExp)=>  {
             setUser({  userName:user,    token:token,     tokenExpiration:tokenExp})
     }
 
     return(
-        <UserContextProvider value={[user, setUser]}>
+        <UserContext.Provider value={{user, setUser, logIn, logout}}>
             {props.children}
-        </UserContextProvider>
+        </UserContext.Provider>
     )
 }
 
