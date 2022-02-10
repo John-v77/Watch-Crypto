@@ -30,11 +30,14 @@ const actions ={
     },
 
     loginUser: async(userInfo)=>{
+
+        let query = queriesQL.loginUserQuery(userInfo)
+        console.log(query)
         let res = await axios({
             url:baseURL, 
             method:'post',
             headers: headers,
-            data:queriesQL.loginUserQuery(userInfo)
+            data:query
         })
         return res
     },

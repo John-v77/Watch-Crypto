@@ -23,7 +23,7 @@ const login = async ({email, password}) =>{
 
     return {
         userId: user.id,
-        userName: user.name,
+        userName: user.userName,
         email:  user.email,
         token:  token, 
         tokenExpiration: 1,
@@ -42,6 +42,7 @@ const createUser = async (args) =>{
         // save user to db
         const hashedPassword = await bcrypt.hash(args.userInput.password, 12)
         const user = new User({
+            userName:   args.userInput.userName,
             email:      args.userInput.email,
             password:   hashedPassword,
 

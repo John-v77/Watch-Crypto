@@ -15,15 +15,15 @@ const  querieGraphQL = {
         `
     },
 
-    loginUserQuery: async (data)=> {
+    loginUserQuery: (data)=> {
         return{
             query:`
-                query Login(@email: String!, @password: String!){
-                    login(email, password){
+                query Login($email: String!, $password: String!){
+                    login(email:$email, password:$password){
                         userId
-                        userName
                         email
                         token
+                        userName
                         tokenExpiration
                     }
                 }
@@ -33,7 +33,7 @@ const  querieGraphQL = {
                 password:data.password
             }
         }
-    }
+    },
 
 
 
