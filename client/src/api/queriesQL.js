@@ -35,6 +35,26 @@ const  querieGraphQL = {
         }
     },
 
+    CreatUserMutation: (data) => {
+        return{
+            query:`
+                mutation CreateUser($userName: String!, $email: String!, $password: String!){
+                    createUser(userInput:{userName:$userName, email:$email, password:$password}){
+                        userName
+                    email
+                    _id
+                    }
+                }
+            `,
+
+            variables:{
+                userName:   data.userName,
+                email:      data.email,
+                password:   data.password
+            }
+        }
+    }
+
 
 
 }

@@ -42,6 +42,19 @@ const actions ={
         return res
     },
 
+    registerUser: async(userCreated)=>{
+        let query = queriesQL.CreatUserMutation(userCreated)
+
+        let res = await axios({
+            url:baseURL, 
+            method:'post',
+            headers: headers,
+            data:query
+        })
+
+        return res
+    }
+
     
 
 }
