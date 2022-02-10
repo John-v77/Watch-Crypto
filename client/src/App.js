@@ -1,13 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Auth from './components/auth/Auth';
-import CoinList from './components/coinsList/CoinsList';
+import Auth from './components/Pages/auth/Auth';
+import CoinList from './components/Pages/coinsList/CoinsList';
 import ErrorPage from './components/auxiliars/errorPage/ErrorPage';
 import NavBar from './components/auxiliars/navbar/NavBar';
+import { UserContextProvider } from './components/auxiliars/context';
 
 function App() {
   return (
     <div className="App">
+    <UserContextProvider>
       <NavBar/>
 
         <Routes>
@@ -18,6 +20,7 @@ function App() {
           <Route path='/*'            element={<ErrorPage/>}/>
           
         </Routes>
+    </UserContextProvider>
     </div>
   );
 }

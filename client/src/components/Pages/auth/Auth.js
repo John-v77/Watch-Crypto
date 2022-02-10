@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import actions from '../../api/api';
+import actions from '../../../api/api';
 import './auth.css'
 
 function Auth(props) {

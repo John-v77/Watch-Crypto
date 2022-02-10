@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import CoinInfo from '../coinInfo/CoinInfo';
-import actions from '../../api/api';
+import CoinInfo from '../../auxiliars/coinInfo/CoinInfo';
+import actions from '../../../api/api';
 import './coinsList.css'
 
 

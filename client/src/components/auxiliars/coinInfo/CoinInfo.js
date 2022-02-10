@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import actions from '../../api/api';
+import actions from '../../../api/api';
 import './coinInfo.css'
 
 function CoinInfo(props) {

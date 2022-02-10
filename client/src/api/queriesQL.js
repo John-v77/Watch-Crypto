@@ -40,7 +40,7 @@ const  querieGraphQL = {
             query:`
                 mutation CreateUser($userName: String!, $email: String!, $password: String!){
                     createUser(userInput:{userName:$userName, email:$email, password:$password}){
-                        userName
+                    userName
                     email
                     _id
                     }
