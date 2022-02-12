@@ -5,16 +5,18 @@ import './auth.css'
 
 function Auth(props) {
 
-    //login Contex
-    // const {user, setUser} = useContext(UserContext)
-    // const login = UserContext(UserContext)
+    //login Context
+    const {user, logInContext} = useContext(UserContext)
+
+    console.log(logInContext, 'response')
+
 
     const {isLoging} = props
 
     // object to be sent to API
     const [loginRequest, setLoginRequest] = useState({})
 
-    // #1
+    // #1 Submit request
     const sendReq =(e)=>{
         console.log('sending request')
         e.preventDefault()
@@ -26,17 +28,7 @@ function Auth(props) {
 
         //check if login in
         if (isLoging){
-            actions.loginUser(loginRequest)
-            .then(res =>{
-                console.log(res, 'response')
-                // setUser({
-                //     userName:'sa',
-                //     token:'nsaull',
-                //     tokenExpiration:'nulfdl'
-                // })
-                // console.log(user, '1')
-            })
-            .catch(err => console.log(err))
+            loginUser()
             return
         }
 
@@ -45,12 +37,11 @@ function Auth(props) {
         actions.registerUser(loginRequest)
                 .then(res =>{
                     console.log(res, 'response register')
-                    // setUser({
-                    //     userName:'sa',
-                    //     token:'nsaull',
-                    //     tokenExpiration:'nulfdl'
-                    // })
-                    // console.log(user, '2')
+                    return
+                })
+                .then(()=>{
+                    loginUser()
+                    // redirect to registered component confirmation -
                 })
                 .catch(err => console.log(err))
 
@@ -63,6 +54,19 @@ function Auth(props) {
     }
 
 
+    const loginUser = ()=>{
+        actions.loginUser(loginRequest)
+        .then(res =>{
+            const {userName, email, token, userId, tokenExpiration} = res.data.data.login
+            logInContext(userName, token, tokenExpiration)
+            localStorage.setItem('token', res?.data?.data.token)
+            console.log(localStorage, 'localStorage')
+            console.log(user, 'after login')
+        })
+        .catch(err => console.log(err))
+    }
+
+  
 
 
     return (

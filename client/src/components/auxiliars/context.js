@@ -13,12 +13,12 @@ export const UserContextProvider =(props)=>{
         setUser({  userName:null,    token:null,     tokenExpiration:null })
         console.log('logout', user)    
     }
-    const logIn =(user, token, tokenExp)=>  {
-            setUser({  userName:user,    token:token,     tokenExpiration:tokenExp})
+    const logInContext =(userZ, token, tokenExp)=>  {
+            setUser({  userName:userZ,    token:token,     tokenExpiration:tokenExp})
     }
 
     return(
-        <UserContext.Provider value={{user, setUser, logIn, logout}}>
+        <UserContext.Provider value={{user, setUser, logInContext, logout}}>
             {props.children}
         </UserContext.Provider>
     )

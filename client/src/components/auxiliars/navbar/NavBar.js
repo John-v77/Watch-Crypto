@@ -9,8 +9,6 @@ function NavBar(props) {
 
     const {user, logout} = useContext(UserContext)
 
-    console.log(user, '4')
-
     return (
         <div className='navBar'>
             <ul className='navBar__links'>

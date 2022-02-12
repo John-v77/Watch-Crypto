@@ -50,7 +50,7 @@ const createUser = async (args) =>{
         const result = await user.save()
 
         //return created user
-        return {...result._doc, password: null, _id: result.id}
+        return {...result._doc, password: null, _id: result.id, tokenExpiration: 1}
 
     }catch(err) {throw err}
 }
