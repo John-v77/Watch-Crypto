@@ -22,7 +22,7 @@ function CoinsList(props) {
     // load on mounting
     useEffect(() => {
         let isMounted = true
-        getCoins()
+        isMounted && getCoins()
         return(()=> isMounted = false)
 
     }, [])

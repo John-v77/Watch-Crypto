@@ -1,12 +1,24 @@
 import axios from "axios"
+import CoinInfo from "../components/auxiliars/coinInfo/CoinInfo.js"
 import queriesQL from './queriesQL.js'
 
 const coinBase_Url = process.env.REACT_APP_LINK
+
+//database url
 const baseURL = "http://localhost:5000/graphql"
 
+// axios headers
 const headers = {
     "content-type" : "application/json",
     "Authorization" : "<token>"
+}
+
+//basical ojs to send with axios
+const axiosReq = {
+    url: baseURL,
+    method: 'post',
+    headers: headers,
+    data: null
 }
 
 
@@ -21,39 +33,45 @@ const actions ={
     // fetch all the coins from Database
     getCoinsFromDB : async()=>{
         let res = await axios({
-            url: baseURL,
-            method: 'post',
-            headers: headers,
+            ...axiosReq,
             data: queriesQL.fetchAllCoinsQuery
         })
         return res
     },
 
     loginUser: async(userInfo)=>{
-
-        let query = queriesQL.loginUserQuery(userInfo)
-        console.log(query)
         let res = await axios({
-            url:baseURL, 
-            method:'post',
-            headers: headers,
-            data:query
+            ...axiosReq,
+            data: queriesQL.loginUserQuery(userInfo)
         })
         return res
     },
 
     registerUser: async(userCreated)=>{
-        let query = queriesQL.CreatUserMutation(userCreated)
-
         let res = await axios({
-            url:baseURL, 
-            method:'post',
-            headers: headers,
-            data:query
+            ...axiosReq,
+            data: queriesQL.CreatUserMutation(userCreated)
         })
 
         return res
-    }
+    },
+
+    voteCoin: async(coinId, userId, token)=>{
+        let query = queriesQL.VoteCoinsMutation(coinId, userId)
+        let header = {
+            "content-type":"application/json",
+            "Authorization": 'Bearer ' + token
+        }
+
+        let res = await axios({
+            ...axiosReq,
+            headers: header,
+            data: query
+        })
+        return res
+    },
+
+
 
     
 

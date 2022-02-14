@@ -53,6 +53,24 @@ const  querieGraphQL = {
                 password:   data.password
             }
         }
+    },
+
+    VoteCoinsMutation: (coinId, userId) =>{
+
+        console.log(typeof(coinId), typeof(userId), '6343')
+        return{
+            query:`
+                mutation VotedCoin($coinIdd: String!, $userIdd: String!){
+                    voteCoin(coinId:$coinIdd, userId:$userIdd){
+                        votes
+                    }
+                }
+            `,
+            variables:{
+                coinIdd: coinId,
+                userIdd: userId
+            }
+        }
     }
 
 

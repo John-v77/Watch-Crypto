@@ -1,15 +1,16 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import actions from '../../../api/api';
-import { UserContext } from '../../auxiliars/Context';
+import { UserContext } from '../../auxiliars/context';
 import './auth.css'
 
 function Auth(props) {
 
+    //redirect
+    const navigate = useNavigate()
+
     //login Context
     const {user, logInContext} = useContext(UserContext)
-
-    console.log(logInContext, 'response')
-
 
     const {isLoging} = props
 
@@ -58,10 +59,14 @@ function Auth(props) {
         actions.loginUser(loginRequest)
         .then(res =>{
             const {userName, email, token, userId, tokenExpiration} = res.data.data.login
-            logInContext(userName, token, tokenExpiration)
-            localStorage.setItem('token', res?.data?.data.token)
+            logInContext(userName, token, tokenExpiration, userId)
+            localStorage.setItem('token', token)
             console.log(localStorage, 'localStorage')
             console.log(user, 'after login')
+            return
+        })
+        .then(()=>{
+            navigate('/coinsList')
         })
         .catch(err => console.log(err))
     }
