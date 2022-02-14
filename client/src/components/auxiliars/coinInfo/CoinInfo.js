@@ -12,7 +12,8 @@ function CoinInfo(props) {
     const [coin, setCoin] = useState({
         price:0,
         id:0,
-        votes:info.votes,
+        votes:  info.votes,
+        voted:  user.votes.includes(ticker)
     })
 
     // load on mounting
@@ -40,7 +41,18 @@ function CoinInfo(props) {
 
 
     //submit votes
-    const submitVote=()=>{
+    const submitVote= async ()=>{
+
+        await addVote()
+
+
+        setCoin({...coin, voted: !coin.voted})
+
+    }
+
+
+    //add vote
+    const addVote=()=>{
         console.log('voting')
         actions.voteCoin(coin.id, user.id, user.token)
                 .then(res =>{
@@ -48,6 +60,7 @@ function CoinInfo(props) {
                     setCoin({...coin, votes: res.data.data.voteCoin.votes})
                 })
                 .catch((err) =>{console.log(err)})
+        return
     }
 
 
@@ -59,8 +72,9 @@ function CoinInfo(props) {
             </div>
            {user.token &&
                 <div className='coin_card__right'>
-                <h3>{ coin.votes }</h3>
-                <button onClick={submitVote} className='hearth_btn'>❤</button>
+                <p>{ coin.votes }</p>
+                <button onClick={submitVote} className='hearth_btn'>
+                {coin.voted ? '❤' : '♡'}</button>
             </div>}
         </div>
     );

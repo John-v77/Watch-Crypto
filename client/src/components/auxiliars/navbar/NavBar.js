@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { UserContext } from '../context';
 import './navbar.css'
 
@@ -8,6 +8,13 @@ import './navbar.css'
 function NavBar(props) {
 
     const {user, logout} = useContext(UserContext)
+    const navigate = useNavigate()
+
+    const logoutUser =async (e)=>{
+        await logout()
+        navigate('/coinsList')
+
+    }
 
     return (
         <div className='navBar'>
@@ -20,7 +27,7 @@ function NavBar(props) {
             <div>
                 {user.userName &&
                 <h4>Welcome: {user.userName} | 
-                    <button className='logOut_btn' onClick={logout}>LogOut</button>
+                    <button className='logOut_btn' onClick={logoutUser}>LogOut</button>
                 </h4>
                 }
             </div>

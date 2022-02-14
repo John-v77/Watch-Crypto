@@ -58,8 +58,8 @@ function Auth(props) {
     const loginUser = ()=>{
         actions.loginUser(loginRequest)
         .then(res =>{
-            const {userName, email, token, userId, tokenExpiration} = res.data.data.login
-            logInContext(userName, token, tokenExpiration, userId)
+            const {userName, token, userId, tokenExpiration, votes} = res.data.data.login
+            logInContext(userName, token, tokenExpiration, userId, votes)
             localStorage.setItem('token', token)
             console.log(localStorage, 'localStorage')
             console.log(user, 'after login')

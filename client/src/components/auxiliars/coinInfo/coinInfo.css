@@ -9,15 +9,27 @@
     border-radius: 5px;
 }
 
-.coin_card h3{
-    margin:0 1rem;
-}
-
+.coin_card h3,
 .coin_card h4{
     margin: 0 1rem;
+}
+
+.coin_card p{
+    margin: 0 0.5rem;
 }
 
 .coin_card__right,
 .coin_card__left{
     margin-top: 1rem;
+}
+
+/* .coin_card__righ{
+    margin-right: 1rem;
+} */
+
+.hearth_btn{
+    border: none;
+    background-color: white;
+    font-size: 1.3rem;
+    margin-right: .5rem;
 }
