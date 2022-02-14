@@ -71,6 +71,22 @@ const  querieGraphQL = {
                 userIdd: userId
             }
         }
+    },
+
+    RemoveVoteCoinsMutation:(coinId, userId) =>{
+        return{
+            query:`
+                mutation RemoveVote($coinIdd: String!, $userIdd: String!){
+                    removeVote(coinId:$coinIdd, userId:$userIdd){
+                        votes
+                    }
+                }
+            `,
+            variables:{
+                coinIdd: coinId,
+                userIdd: userId
+            }
+        }
     }
 
 

@@ -43,10 +43,11 @@ function CoinInfo(props) {
     //submit votes
     const submitVote= async ()=>{
 
-        await addVote()
-
-
         setCoin({...coin, voted: !coin.voted})
+        coin.voted ?
+            await addVote() :
+            await deleteVote()
+
 
     }
 
@@ -55,6 +56,19 @@ function CoinInfo(props) {
     const addVote=()=>{
         console.log('voting')
         actions.voteCoin(coin.id, user.id, user.token)
+                .then(res =>{
+                    console.log(res, 'voting res')
+                    setCoin({...coin, votes: res.data.data.voteCoin.votes})
+                })
+                .catch((err) =>{console.log(err)})
+        return
+    }
+
+
+    //delete vote
+    const deleteVote=()=>{
+        console.log('un-voting')
+        actions.removeVote(coin.id, user.id, user.token)
                 .then(res =>{
                     console.log(res, 'voting res')
                     setCoin({...coin, votes: res.data.data.voteCoin.votes})

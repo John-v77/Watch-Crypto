@@ -71,11 +71,19 @@ const actions ={
         return res
     },
 
+    removeVoteCoin: async(coinId, userId, token)=>{
+        let query = queriesQL.RemoveVoteCoinsMutation(coinId, userId)
+        let header = {
+            "content-type":"application/json",
+            "Authorization": 'Bearer ' + token
+        }
 
-
-    
-
+        let res = await axios({
+            ...axiosReq,
+            headers: header,
+            data: query
+        })
+        return res
+    }
 }
-
-
 export default actions
