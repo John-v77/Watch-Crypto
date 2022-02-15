@@ -61,11 +61,44 @@ const voteCoin = async({coinId, userId})=>{
 }   
 
 
+const removeVote = async({coinId, userId})=>{
 
+    // guard clause .. one vote per user
+    const hasVoted = await Coin.findOne({voters:userId})
+    if(!hasVoted ) throw new Error("User didn't vote")
+    console.log(hasVoted)
+
+
+    //find the right coin and update it
+    try{
+    let res1 = await Coin.findByIdAndUpdate(
+                        {_id: coinId},                  // find the record  
+                        {$int: {vote : -1}},            // increment the record
+                        {$pull: {voters: userId}}      // update list of voters
+                        )
+
+    let res = await Coin.findOne({_id:coinId})
+    console.log(res, "resDb")
+
+        // update the list of votes on user side
+        try{
+            await User.updateOne(
+                {_id: userId},
+                {$pull: {votes: res.ticker}}
+            )
+        }catch(err){throw err}
+
+
+    return res
+    }catch(err){throw err}
+
+    
+
+}   
 
 module.exports ={
     coins,
     addCoin,
     voteCoin,
-
+    removeVote
 }
