@@ -1,41 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import CoinInfo from '../coinInfo/CoinInfo';
+import CoinInfo from '../../auxiliars/coinInfo/CoinInfo';
+import actions from '../../../api/api';
 import './coinsList.css'
 
 
 function CoinsList(props) {
-
+    
     const [coinsList, setCoinList] = useState([])
-    const listZ = ['BTC', 'ETH', 'DOGE']
 
-    // send Api Request
-    const getData =(ticker)=>{
-        axios.get(`https://api.coinbase.com/v2/prices/${ticker}-USD/spot`)
-            .then(res => {
-                console.log(res.data.data, 'res**************')
-                setCoinList((curr) => [...curr, res.data.data])
+    
+    // retrieve coins from database
+    const getCoins = ()=>{
+        actions.getCoinsFromDB()
+            .then(res =>{
+    
+                setCoinList(res.data.data.coins)
             })
-            .catch((err) => console.log(err))
+            .catch(err => console.log(err))
     }
 
-    // get all data
-    const retrieveData =()=>{
-        //resets the coinList
-        setCoinList([])
-        listZ.forEach(el => getData(el))
-        }
-
-
-
+    // load on mounting
     useEffect(() => {
         let isMounted = true
-        retrieveData()
+        isMounted && getCoins()
         return(()=> isMounted = false)
 
     }, [])
 
 
+    // display data
     const displayData =()=>{
 
         if(!coinsList) return null
@@ -46,8 +39,6 @@ function CoinsList(props) {
             )
         })
     }
-
-    console.log(coinsList, 'res**************')
 
     return (
         <div className='coins__page'>

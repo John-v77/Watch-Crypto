@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const coinSchema = new Schema({
     title: {type:String, required:true},
     ticker: {type:String, required:true},
-
+    votes:{type:Number, required:true},
     voters: [
         {
             type: Schema.Types.ObjectId,

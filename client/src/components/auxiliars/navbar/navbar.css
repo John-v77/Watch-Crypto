@@ -2,6 +2,8 @@
     width: 100%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .navBar__links{
@@ -22,3 +24,13 @@
 a, a:visited, a:hover, a:active {
     color: inherit;
   }
+
+
+.logOut_btn {
+    border: 0;
+    background-color: white;
+}
+
+.logOut_btn:hover{
+    color: blue;
+}

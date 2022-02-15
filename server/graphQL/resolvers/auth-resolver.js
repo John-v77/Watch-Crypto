@@ -23,10 +23,11 @@ const login = async ({email, password}) =>{
 
     return {
         userId: user.id,
-        userName: user.name,
+        userName: user.userName,
         email:  user.email,
         token:  token, 
-        tokenExpiration: 1
+        tokenExpiration: 1,
+        votes: user.votes
     } 
 }
 
@@ -41,13 +42,15 @@ const createUser = async (args) =>{
         // save user to db
         const hashedPassword = await bcrypt.hash(args.userInput.password, 12)
         const user = new User({
+            userName:   args.userInput.userName,
             email:      args.userInput.email,
-            password:   hashedPassword
+            password:   hashedPassword,
+
         })
         const result = await user.save()
 
         //return created user
-        return {...result._doc, password: null, _id: result.id}
+        return {...result._doc, password: null, _id: result.id, tokenExpiration: 1}
 
     }catch(err) {throw err}
 }

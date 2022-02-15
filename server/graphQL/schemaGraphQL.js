@@ -12,6 +12,8 @@ module.exports = buildSchema(`
         _id:    ID!
         title:  String!
         ticker: String!
+        voters: [String!]
+        votes: Int
     }
 
 
@@ -19,6 +21,7 @@ module.exports = buildSchema(`
         _id:        ID!
         email:      String!
         password:   String
+        userName:   String!
     }
 
 
@@ -40,6 +43,7 @@ module.exports = buildSchema(`
     input UserInput{
         email:      String!
         password:   String!
+        userName:   String!
     }
     
 
