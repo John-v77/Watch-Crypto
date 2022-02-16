@@ -1,2 +1,2 @@
 # Watch-Crypto
-An application help you keep track of Crypto currencies 
+An application that helps you keep track of Crypto currencies 
