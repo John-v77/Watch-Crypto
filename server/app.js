@@ -15,6 +15,9 @@ const MONGO_URI = process.env.MONGODB_URI
 
 const app = express()
 
+
+const isAuth = require('./middleware/is-auth')
+
 //cors
 // const cors = require('cors')
 // app.use(
@@ -39,7 +42,10 @@ app.use(bodyParser.json())
 
 //will pass this function without executing, for express to execute
 // app.use(isAuth)
-//
+
+
+app.use(isAuth)   // protected routes middleware
+
 
 app.use('/graphql', graphqlHTTP({
     // /the below schema is in a string

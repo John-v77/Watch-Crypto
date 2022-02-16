@@ -26,7 +26,11 @@ const addCoin = async (args)=>{
 
 
 // vote coin
-const voteCoin = async({coinId, userId})=>{
+const voteCoin = async({coinId, userId}, args)=>{
+
+    if(!args.isAuth){
+        throw new Error('Unauthenticated')   //protected route -- if the error is thrown the rest of code will not execute
+    }
 
     // guard clause .. one vote per user
     const hasVoted = await Coin.findOne({voters:userId})
@@ -61,7 +65,11 @@ const voteCoin = async({coinId, userId})=>{
 }   
 
 
-const removeVote = async({coinId, userId})=>{
+const removeVote = async({coinId, userId}, req)=>{
+
+    if(!args.isAuth){
+        throw new Error('Unauthenticated')   //protected route -- if the error is thrown the rest of code will not execute
+    }
 
     // guard clause .. one vote per user
     const hasVoted = await Coin.findOne({voters:userId})
