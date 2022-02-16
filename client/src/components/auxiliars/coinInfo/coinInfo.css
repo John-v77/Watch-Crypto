@@ -10,10 +10,15 @@
     border-radius: 5px;
 }
 
-.coin_card h3,
-.coin_card h4{
+.coin_card__left h3,
+.coin_card__left h4{
     margin: 0 1rem;
 }
+
+.coin_card__left h4{
+    font-weight: 400;
+}
+
 
 .coin_card p{
     margin: 0 0.5rem;
