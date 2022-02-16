@@ -16,7 +16,7 @@ const MONGO_URI = process.env.MONGODB_URI
 const app = express()
 
 
-const isAuth = require('./middleware/is-auth')
+const isAuth = require('./graphQL/middleware/is-auth')
 
 //cors
 // const cors = require('cors')

@@ -16,28 +16,45 @@ function CoinInfo(props) {
         voted:  user.votes.includes(ticker)
     })
 
+    const [livePrice, setLivePrice] = useState(0)
+
     // load on mounting
     useEffect(() => {
         let isMounted = true
 
         isMounted && getData(ticker)
+        
         return(()=> isMounted = false)
     }, [])
     
 
     // send Api Request
     const getData =(ticker)=>{
-
+        console.log('getting data')
         actions.getCryptoData(ticker)
                 .then(res => {
                     setCoin(
-                        {...coin, 
+                        {
                             price : res.data.data.amount,
                             id: info._id}
                         )
                 })
                 .catch((err) => console.log(err))
     }
+
+
+
+    //get live data
+    const getLiveData =(ticker)=>{
+        console.log('getting data')
+        actions.getCryptoData(ticker)
+                .then(res => {
+                    setLivePrice(res.data.data.amount)
+                })
+                .catch((err) => console.log(err))
+    }
+
+
 
 
     //submit votes
@@ -68,7 +85,7 @@ function CoinInfo(props) {
     //delete vote
     const deleteVote=()=>{
         console.log('un-voting')
-        actions.removeVote(coin.id, user.id, user.token)
+        actions.removeVoteCoin(coin.id, user.id, user.token)
                 .then(res =>{
                     console.log(res, 'voting res')
                     setCoin({...coin, votes: res.data.data.voteCoin.votes})
@@ -76,6 +93,12 @@ function CoinInfo(props) {
                 .catch((err) =>{console.log(err)})
         return
     }
+
+
+    // set continous update.
+
+
+
 
 
     return (
@@ -86,7 +109,7 @@ function CoinInfo(props) {
             </div>
            {user.token &&
                 <div className='coin_card__right'>
-                <p>{ coin.votes }</p>
+                <p>{ info.votes }</p>
                 <button onClick={submitVote} className='hearth_btn'>
                 {coin.voted ? '❤' : '♡'}</button>
             </div>}

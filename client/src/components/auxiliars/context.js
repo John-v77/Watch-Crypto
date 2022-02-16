@@ -4,11 +4,11 @@ export const UserContext = React.createContext()
 
 export const UserContextProvider =(props)=>{
     const [user, setUser] = useState({
-        userName: 'sa',
-        token: 'sa',
-        tokenExpiration: 'sa',
-        id:'sa',
-        votes:["ETH"]
+        userName: null,
+        token: null,
+        tokenExpiration: null,
+        id:null,
+        votes:[]
     })
 
     const logout =()=> {
