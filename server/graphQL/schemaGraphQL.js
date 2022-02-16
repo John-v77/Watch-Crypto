@@ -56,9 +56,9 @@ module.exports = buildSchema(`
     type RootMutation{
         createUser(userInput: UserInput): User
         addCoin(coinInput: CoinInput): Coin
-
-        votedCoin(coinId: ID!, userId: ID!): Vote!
-        removeVote(voteId: ID!): Coin!
+        voteCoin(coinId: String!, userId: String!): Coin!
+        votedCoin(coinId: String!, userId: String!): Vote!
+        removeVote(coinId: String!, userId: String!): Coin!
     }
 
     schema{
